@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supassara | Creative Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0d0e15;
+            --text-color: #f3f4f6;
+            --accent-color: #a855f7; /* Vibrant Purple */
+            --secondary-color: #6366f1; /* Indigo */
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Abstract Glow Effects */
+        .glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, rgba(0,0,0,0) 70%);
+            top: -100px;
+            right: -100px;
+            z-index: -1;
+        }
+
+        header {
+            padding: 2rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #9ca3af;
+            margin-left: 2.5rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--text-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 8%;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-tag {
+            color: var(--accent-color);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(45deg, #f3f4f6, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            color: #9ca3af;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        /* Buttons */
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(168, 85, 247, 0.3);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--card-border);
+            color: var(--text-color);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Portfolio Grid */
+        .section {
+            padding: 6rem 8%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: #9ca3af;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 280px;
+        }
+
+        .card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .card-number {
+            font-size: 0.85rem;
+            color: #6b7280;
+            font-family: monospace;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .card p {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-link:hover {
+            color: var(--accent-color);
+        }
+
+        /* Contact Section */
+        .contact-box {
+            background: linear-gradient(135deg, rgba(168,85,247,0.05) 0%, rgba(99,102,241,0.05) 100%);
+            border: 1px solid var(--card-border);
+            padding: 5rem 3rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .contact-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-box p {
+            color: #9ca3af;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 8%;
+            color: #4b5563;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1.5rem 5%; }
+            nav { display: none; } /* Simplified for mobile example */
+            .hero { padding: 6rem 5%; }
+            .section { padding: 4rem 5%; }
+            .cta-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow"></div>
+
+    <header>
+        <div class="logo">SUPASSRA</div>
+        <nav>
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero" id="about">
+            <span class="hero-tag">Available for Freelance</span>
+            <h1>Hi, I'm <span>Supassara.</span><br>I build digital experiences.</h1>
+            <p>A designer and developer focused on crafting clean, intentional, and highly functional digital environments that solve actual problems.</p>
+            <div class="cta-group">
+                <a href="#work" class="btn btn-primary">See My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </section>
+
+        <!-- Selected Work -->
+        <section class="section" id="work">
+            <div class="section-header">
+                <h2>Selected Projects</h2>
+                <p>A glimpse into recent design frameworks and software deployments.</p>
+            </div>
+            
+            <div class="grid">
+                <!-- Box 1 -->
+                <div class="card">
+                    <div>
+                        <span class="card-number">01 / DEVELOPMENT</span>
+                        <h3 class="card-title">E-Commerce Architecture</h3>
+                        <p>A highly-scalable commerce engine utilizing ultra-fast modern frameworks for sub-second page loads.</p>
+                    </div>
+                    <a href="#" class="card-link">Explore Project &rarr;</a>
+                </div>
+
+                <!-- Box 2 -->
+                <div class="card">
+                    <div>
+                        <span class="card-number">02 / UI/UX DESIGN</span>
+                        <h3 class="card-title">Fintech Dashboard</h3>
+                        <p>User research, micro-interactions, and visual identity designed seamlessly for a next-gen crypto asset manager.</p>
+                    </div>
+                    <a href="#" class="card-link">Explore Project &rarr;</a>
+                </div>
+
+                <!-- Box 3 -->
+                <div class="card">
+                    <div>
+                        <span class="card-number">03 / BRANDING</span>
+                        <h3 class="card-title">Aura Studio Rebrand</h3>
+                        <p>Complete asset production and brand guidelines created for an architectural firm based in Bangkok.</p>
+                    </div>
+                    <a href="#" class="card-link">Explore Project &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <div class="contact-box">
+                <h2>Let's start something.</h2>
+                <p>Looking for a collaboration, hiring, or simply wanting to discuss an upcoming idea? Drop a line anytime.</p>
+                <a href="mailto:hello@supassara.com" class="btn btn-primary">Say Hello</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Supassara. Crafted independently.</p>
+    </footer>
+
+</body>
+</html>
